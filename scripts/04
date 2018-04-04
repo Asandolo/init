@@ -1,0 +1,11 @@
+#! /bin/bash 
+# 0 0 * * *
+
+FILE="/etc/crontab"
+LAST_CHANGE=$(md5sum --tag ${FILE} | awk '{print $4}')
+MYCHANGE="f691b3e1d9a43098f25912bee9a3a24e"
+
+if [ ${LAST_CHANGE} != ${MYCHANGE} ]; then
+	CMAIL="FICHIER CRON MODIFIER"
+	echo "${CMAIL}" | mail -s "ALERTE CRON" root
+fi
